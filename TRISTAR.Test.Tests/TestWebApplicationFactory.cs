@@ -5,7 +5,7 @@ using System;
 using TRISTAR.Test.People;
 using TRISTAR.Test.Server;
 
-namespace TRISTAR.Test.Mocks
+namespace TRISTAR.Test
 {
     internal class TestWebApplicationFactory : WebApplicationFactory<Startup>
     {
