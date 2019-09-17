@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
-namespace TRISTAR.Test.Infrastructure
+namespace TRISTAR.Assessment.Infrastructure
 {
     /// <summary>
     /// Base class for parameters that can patch other objects.

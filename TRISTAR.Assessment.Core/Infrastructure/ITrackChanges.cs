@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TRISTAR.Test.Infrastructure
+namespace TRISTAR.Assessment.Infrastructure
 {
     /// <summary>
     /// Interface for objects that track their changed properties.

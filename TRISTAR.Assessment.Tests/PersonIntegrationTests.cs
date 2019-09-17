@@ -2,10 +2,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using TRISTAR.Test.Infrastructure;
-using TRISTAR.Test.People;
+using TRISTAR.Assessment.Infrastructure;
+using TRISTAR.Assessment.People;
 
-namespace TRISTAR.Test
+namespace TRISTAR.Assessment
 {
     [TestClass]
     public class PersonIntegrationTests
@@ -15,7 +15,7 @@ namespace TRISTAR.Test
         {
             var factory = new TestWebApplicationFactory();
             var client = factory.CreateClient();
-            var httpRepo = new PersonHttpRepository(client);
+            var httpRepo = new PersonClientRepository(client);
 
             var person = await httpRepo.CreatePerson(new EditPersonParameters
             {
@@ -34,7 +34,7 @@ namespace TRISTAR.Test
             var factory = new TestWebApplicationFactory();
             var client = factory.CreateClient();
             factory.AddSampleData();
-            var httpRepo = new PersonHttpRepository(client);
+            var httpRepo = new PersonClientRepository(client);
 
             var person = await httpRepo.EditPerson(TestWebApplicationFactory.JaneSmith.Id,
                 new EditPersonParameters
@@ -52,7 +52,7 @@ namespace TRISTAR.Test
             var factory = new TestWebApplicationFactory();
             var client = factory.CreateClient();
             factory.AddSampleData();
-            var httpRepo = new PersonHttpRepository(client);
+            var httpRepo = new PersonClientRepository(client);
 
             await httpRepo.DeletePerson(TestWebApplicationFactory.JohnDoe.Id)
                 .ConfigureAwait(false);
@@ -72,7 +72,7 @@ namespace TRISTAR.Test
             var factory = new TestWebApplicationFactory();
             var client = factory.CreateClient();
             factory.AddSampleData();
-            var httpRepo = new PersonHttpRepository(client);
+            var httpRepo = new PersonClientRepository(client);
 
             var person = await httpRepo.GetPerson(TestWebApplicationFactory.JohnDoe.Id)
                 .ConfigureAwait(false);
@@ -87,7 +87,7 @@ namespace TRISTAR.Test
             var factory = new TestWebApplicationFactory();
             var client = factory.CreateClient();
             factory.AddSampleData();
-            var httpRepo = new PersonHttpRepository(client);
+            var httpRepo = new PersonClientRepository(client);
 
             var people = await httpRepo.GetPeople(new QueryPersonParameters())
                 .ConfigureAwait(false);
@@ -103,7 +103,7 @@ namespace TRISTAR.Test
             var factory = new TestWebApplicationFactory();
             var client = factory.CreateClient();
             factory.AddSampleData();
-            var httpRepo = new PersonHttpRepository(client);
+            var httpRepo = new PersonClientRepository(client);
 
             var people = await httpRepo.GetPeople(new QueryPersonParameters
             {
@@ -122,7 +122,7 @@ namespace TRISTAR.Test
             var factory = new TestWebApplicationFactory();
             var client = factory.CreateClient();
             factory.AddSampleData();
-            var httpRepo = new PersonHttpRepository(client);
+            var httpRepo = new PersonClientRepository(client);
 
             var people = await httpRepo.GetPeople(new QueryPersonParameters
             {

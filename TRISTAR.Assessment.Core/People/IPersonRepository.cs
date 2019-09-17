@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace TRISTAR.Test.People
+namespace TRISTAR.Assessment.People
 {
     public interface IPersonRepository
     {

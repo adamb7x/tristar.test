@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using TRISTAR.Test.People;
+using TRISTAR.Assessment.People;
 
-namespace TRISTAR.Test.Server
+namespace TRISTAR.Assessment.Server
 {
     public class Startup
     {

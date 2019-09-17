@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="microsoft.aspnetcore.mvc.testing" Version="2.2.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.0.0" />
@@ -17,9 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TRISTAR.Test.Core\TRISTAR.Test.Core.csproj" />
-    <ProjectReference Include="..\TRISTAR.Test.Http\TRISTAR.Test.Http.csproj" />
-    <ProjectReference Include="..\TRISTAR.Test.Server\TRISTAR.Test.Server.csproj" />
+    <ProjectReference Include="..\TRISTAR.Assessment.Core\TRISTAR.Assessment.Core.csproj" />
+    <ProjectReference Include="..\TRISTAR.Assessment.Client\TRISTAR.Assessment.Client.csproj" />
+    <ProjectReference Include="..\TRISTAR.Assessment.Server\TRISTAR.Assessment.Server.csproj" />
   </ItemGroup>
 
 </Project>

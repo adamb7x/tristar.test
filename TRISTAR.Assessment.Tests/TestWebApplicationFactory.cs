@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using TRISTAR.Test.People;
-using TRISTAR.Test.Server;
+using TRISTAR.Assessment.People;
+using TRISTAR.Assessment.Server;
 
-namespace TRISTAR.Test
+namespace TRISTAR.Assessment
 {
     internal class TestWebApplicationFactory : WebApplicationFactory<Startup>
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TRISTAR.Test.People
+namespace TRISTAR.Assessment.People
 {
     public class Person
     {

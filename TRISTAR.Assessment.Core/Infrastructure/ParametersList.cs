@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TRISTAR.Test.Infrastructure
+namespace TRISTAR.Assessment.Infrastructure
 {
     public class ParametersList<T> : List<T>
     {

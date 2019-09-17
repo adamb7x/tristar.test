@@ -1,3 +1,3 @@
 # TRISTAR Test
 
-This repository is a basic programming test for TRISTAR (www.star3.com). If you're taking this test, your goal is to make the integration tests work that are located in the [PersonIntegrationTests](TRISTAR.Test.Tests/PersonIntegrationTests.cs) file. Instructions are intentionally vague, as being able to complete a task without explicit instructions is part of the test.
+This repository is a basic programming test for TRISTAR (www.star3.com). If you're taking this test, your goal is to make the integration tests work that are located in the [PersonIntegrationTests](TRISTAR.Assessment.Tests/PersonIntegrationTests.cs) file. You are not allowed to change the tests. The primary code file that you should be modifying is [PersonClientRepository](TRISTAR.Assessment.Client/People/PersonClientRepository.cs), although feel free to add other supporting files as necessary. Additionally, please don't hesitate to pull in NuGet packages as required.

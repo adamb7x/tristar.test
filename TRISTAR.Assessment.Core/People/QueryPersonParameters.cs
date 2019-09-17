@@ -1,7 +1,7 @@
 ﻿using System;
-using TRISTAR.Test.Infrastructure;
+using TRISTAR.Assessment.Infrastructure;
 
-namespace TRISTAR.Test.People
+namespace TRISTAR.Assessment.People
 {
     public class QueryPersonParameters
     {

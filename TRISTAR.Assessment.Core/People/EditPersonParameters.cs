@@ -1,6 +1,6 @@
-﻿using TRISTAR.Test.Infrastructure;
+﻿using TRISTAR.Assessment.Infrastructure;
 
-namespace TRISTAR.Test.People
+namespace TRISTAR.Assessment.People
 {
     /// <summary>
     /// Parameters to be sent to the server when modifying a <see cref="Person"/>.

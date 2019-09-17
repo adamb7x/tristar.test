@@ -3,9 +3,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TRISTAR.Test.Infrastructure;
+using TRISTAR.Assessment.Infrastructure;
 
-namespace TRISTAR.Test.People
+namespace TRISTAR.Assessment.People
 {
     public class PersonServerRepository : IPersonRepository
     {

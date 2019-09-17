@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace TRISTAR.Test.People
+namespace TRISTAR.Assessment.People
 {
     [Route("api/[controller]")]
     public class PersonController : ControllerBase, IPersonRepository

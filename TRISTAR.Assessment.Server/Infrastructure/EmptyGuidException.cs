@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TRISTAR.Test.Infrastructure
+namespace TRISTAR.Assessment.Infrastructure
 {
     public class EmptyGuidException : ArgumentException
     {
