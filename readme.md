@@ -13,7 +13,7 @@ The http API has basic endpoints for manipulating `Person` resources. With the A
 The following is a quick overview of each project:
 
 * [TRISTAR.Assessment.Core](TRISTAR.Assessment.Core/readme.md): All files shared between client and server are found here. For example, all repository interfaces are defined here.
-* [TRISTAR.Assessment.Client](TRISTAR.Assessment.Client/readme.md): Client-side files are found in this project. For example, the [client-side implementation](TRISTAR.Assessment.Client/People/PersonClientRepository.cs) of [IPersonRepository](TRISTAR.Assessment.Core\People\IPersonRepository.cs) lives here.
+* [TRISTAR.Assessment.Client](TRISTAR.Assessment.Client/readme.md): Client-side files are found in this project. For example, the [client-side implementation](TRISTAR.Assessment.Client/People/PersonClientRepository.cs) of [IPersonRepository](TRISTAR.Assessment.Core/People/IPersonRepository.cs) lives here.
 * [TRISTAR.Assessment.Server](TRISTAR.Assessment.Server/readme.md): Server-side files are found here.
 * [TRISTAR.Assessment.Tests](TRISTAR.Assessment.Tests/readme.md): Integration tests are found in this project.
 
