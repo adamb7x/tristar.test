@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TRISTAR.Assessment.People
 {
-    [Route("api/[controller]")]
+    [Route("api/people")]
     public class PersonController : ControllerBase, IPersonRepository
     {
         private readonly IPersonRepository _repository;
