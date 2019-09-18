@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 
 namespace TRISTAR.Assessment.People
 {
+    /// <summary>
+    /// The http controller that defines the API endpoints.
+    /// This class essentially just hands off to the <see cref="IPersonRepository"/>.
+    /// </summary>
     [Route("api/people")]
     public class PersonController : ControllerBase, IPersonRepository
     {

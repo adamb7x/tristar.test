@@ -7,6 +7,9 @@ using TRISTAR.Assessment.People;
 
 namespace TRISTAR.Assessment.Server
 {
+    /// <summary>
+    /// Configures the http api and is invoked by <see cref="Program.Main(string[])"/>
+    /// </summary>
     public class Startup
     {
         public Startup(IConfiguration configuration)

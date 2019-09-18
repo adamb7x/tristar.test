@@ -2,6 +2,9 @@
 
 namespace TRISTAR.Assessment.Infrastructure
 {
+    /// <summary>
+    /// Thrown when an empty unique identifier is provided as an argument.
+    /// </summary>
     public class EmptyGuidException : ArgumentException
     {
         private const string ExceptionMessage = "A non-empty GUID is required!";

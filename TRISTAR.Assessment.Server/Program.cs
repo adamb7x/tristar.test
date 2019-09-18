@@ -12,6 +12,10 @@ namespace TRISTAR.Assessment.Server
 {
     public class Program
     {
+        /// <summary>
+        /// Runs the http api.
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();

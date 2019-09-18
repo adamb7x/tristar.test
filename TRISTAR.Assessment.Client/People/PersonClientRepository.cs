@@ -18,30 +18,56 @@ namespace TRISTAR.Assessment.People
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         }
 
+        /// <summary>
+        /// Invokes the http api to create a person on the server.
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public Task<Person> CreatePerson(EditPersonParameters parameters)
         {
             // Implementation goes here!
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Invokes the http api to delete a person from the server.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Task DeletePerson(Guid id)
         {
             // Implementation goes here!
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Invokes the http api to modify a person on the server.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public Task<Person> EditPerson(Guid id, EditPersonParameters parameters)
         {
             // Implementation goes here!
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Invokes the http api to return one or more people that match the query parameters.
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public Task<IEnumerable<Person>> GetPeople(QueryPersonParameters parameters)
         {
             // Implementation goes here!
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Invokes the http api to return one person who matches the provided id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Task<Person> GetPerson(Guid id)
         {
             // Implementation goes here!

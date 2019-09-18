@@ -7,8 +7,16 @@ using TRISTAR.Assessment.Infrastructure;
 
 namespace TRISTAR.Assessment.People
 {
+    /// <summary>
+    /// The server-side implementation of <see cref="IPersonRepository"/>.
+    /// This class is responsible for managing the data on the server side.
+    /// In a real life application this would likely be backed by a database of some sort.
+    /// </summary>
     public class PersonServerRepository : IPersonRepository
     {
+        /// <summary>
+        /// Poor man's database. This is where the data is stored in memory while the server runs.
+        /// </summary>
         public readonly ConcurrentDictionary<Guid, Person> People;
 
         public PersonServerRepository()
