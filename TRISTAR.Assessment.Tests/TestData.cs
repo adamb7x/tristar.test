@@ -1,0 +1,66 @@
+﻿using System;
+using TRISTAR.Assessment.People;
+
+namespace TRISTAR.Assessment
+{
+    /// <summary>
+    /// Holds testing constants and creates test instances of data.
+    /// </summary>
+    internal static class TestData
+    {
+        internal static class JaneSmith
+        {
+            public static readonly Guid Id = Guid.Parse("b548a703-f2ee-45b5-9ea3-514dcd502cca");
+            public const string FirstName = "Jane";
+            public const string LastName = "Smith";
+        }
+
+        internal static class JohnDoe
+        {
+            public static readonly Guid Id = Guid.Parse("cd6b4fbf-69bc-4f88-974f-a5e308d32185");
+            public const string FirstName = "John";
+            public const string LastName = "Doe";
+        }
+
+        /// <summary>
+        /// Creates a new instance of the Jane Smith person for testing.
+        /// </summary>
+        /// <returns></returns>
+        internal static Person CreateJaneSmith()
+        {
+            return new Person
+            {
+                FirstName = JaneSmith.FirstName,
+                Id = JaneSmith.Id,
+                LastName = JaneSmith.LastName
+            };
+        }
+
+        /// <summary>
+        /// Creates a new instance of the John Doe person for testing.
+        /// </summary>
+        /// <returns></returns>
+        internal static Person CreateJohnDoe()
+        {
+            return new Person
+            {
+                FirstName = JohnDoe.FirstName,
+                Id = JohnDoe.Id,
+                LastName = JohnDoe.LastName
+            };
+        }
+
+        /// <summary>
+        /// Creates an array of two people: John Doe and Jane Smith.
+        /// </summary>
+        /// <returns></returns>
+        internal static Person[] CreateTestPeople()
+        {
+            return new[]
+            {
+                CreateJohnDoe(),
+                CreateJaneSmith()
+            };
+        }
+    }
+}

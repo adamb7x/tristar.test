@@ -7,9 +7,16 @@ using TRISTAR.Assessment.People;
 
 namespace TRISTAR.Assessment
 {
+    /// <summary>
+    /// These tests verify that the API and client libraries correctly work with the people endpoints.
+    /// </summary>
     [TestClass]
     public class PersonIntegrationTests
     {
+        /// <summary>
+        /// Tests that the API can add a person.
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
         public async Task CanCreatePerson()
         {
@@ -19,122 +26,167 @@ namespace TRISTAR.Assessment
 
             var person = await httpRepo.CreatePerson(new EditPersonParameters
             {
-                FirstName = TestWebApplicationFactory.JohnDoe.FirstName,
-                LastName = TestWebApplicationFactory.JohnDoe.LastName
+                FirstName = TestData.JohnDoe.FirstName,
+                LastName = TestData.JohnDoe.LastName
             }).ConfigureAwait(false);
 
+            // Ensure that we received an instance of Person.
             Assert.IsNotNull(person);
-            Assert.AreEqual(TestWebApplicationFactory.JohnDoe.FirstName, person.FirstName);
-            Assert.AreEqual(TestWebApplicationFactory.JohnDoe.LastName, person.LastName);
+            // Test that the first name is correct.
+            Assert.AreEqual(TestData.JohnDoe.FirstName, person.FirstName);
+            // Test that the last name is correct.
+            Assert.AreEqual(TestData.JohnDoe.LastName, person.LastName);
         }
 
+        /// <summary>
+        /// Tests that the API can modify an existing person.
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
         public async Task CanEditPerson()
         {
             var factory = new TestWebApplicationFactory();
             var client = factory.CreateClient();
-            factory.AddSampleData();
+            factory.AddTestData(TestData.CreateTestPeople());
             var httpRepo = new PersonClientRepository(client);
 
-            var person = await httpRepo.EditPerson(TestWebApplicationFactory.JaneSmith.Id,
+            var person = await httpRepo.EditPerson(TestData.JaneSmith.Id,
                 new EditPersonParameters
             {
-                LastName = TestWebApplicationFactory.JohnDoe.LastName
+                LastName = TestData.JohnDoe.LastName
             }).ConfigureAwait(false);
 
+            // Ensure that we received an instance of Person.
             Assert.IsNotNull(person);
-            Assert.AreEqual(TestWebApplicationFactory.JohnDoe.LastName, person.LastName);
+            // Ensure that the last name has changed to the expected value.
+            Assert.AreEqual(TestData.JohnDoe.LastName, person.LastName);
         }
 
+        /// <summary>
+        /// Tests that the API can remove a person.
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
         public async Task CanDeletePerson()
         {
             var factory = new TestWebApplicationFactory();
             var client = factory.CreateClient();
-            factory.AddSampleData();
+            var testPeople = TestData.CreateTestPeople();
+            factory.AddTestData(testPeople);
             var httpRepo = new PersonClientRepository(client);
 
-            await httpRepo.DeletePerson(TestWebApplicationFactory.JohnDoe.Id)
+            await httpRepo.DeletePerson(TestData.JohnDoe.Id)
                 .ConfigureAwait(false);
 
             var people = await httpRepo.GetPeople(new QueryPersonParameters())
                 .ConfigureAwait(false);
             var peopleArray = people?.ToArray();
 
+            // Ensure that something was returned from GetPeople.
             Assert.IsNotNull(peopleArray);
-            Assert.AreEqual(TestWebApplicationFactory.SamplePeople.Length - 1, peopleArray.Length);
-            Assert.AreEqual(TestWebApplicationFactory.JaneSmith.Id, peopleArray[0].Id);
+            // Since we deleted one person, our people count should reflect that.
+            Assert.AreEqual(testPeople.Length - 1, peopleArray.Length);
+            // Ensure that none of the remaining identifiers belong to John Doe because he was deleted.
+            Assert.IsTrue(peopleArray.All(p => p.Id != TestData.JohnDoe.Id));
         }
 
+        /// <summary>
+        /// Tests that the API can get a single person by their unique identifier.
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
         public async Task CanGetPerson()
         {
             var factory = new TestWebApplicationFactory();
             var client = factory.CreateClient();
-            factory.AddSampleData();
+            factory.AddTestData(TestData.CreateTestPeople());
             var httpRepo = new PersonClientRepository(client);
 
-            var person = await httpRepo.GetPerson(TestWebApplicationFactory.JohnDoe.Id)
+            var person = await httpRepo.GetPerson(TestData.JohnDoe.Id)
                 .ConfigureAwait(false);
 
+            // Ensure that we received something from GetPerson.
             Assert.IsNotNull(person);
-            Assert.AreEqual(TestWebApplicationFactory.JohnDoe.Id, person.Id);
+            // Ensure that the person we received is the one we asked for based on the identifier.
+            Assert.AreEqual(TestData.JohnDoe.Id, person.Id);
         }
 
+        /// <summary>
+        /// Tests that the API can get all existing people.
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
         public async Task CanGetPeople()
         {
             var factory = new TestWebApplicationFactory();
             var client = factory.CreateClient();
-            factory.AddSampleData();
+            var testPeople = TestData.CreateTestPeople();
+            factory.AddTestData(testPeople);
             var httpRepo = new PersonClientRepository(client);
 
             var people = await httpRepo.GetPeople(new QueryPersonParameters())
                 .ConfigureAwait(false);
             var peopleArray = people?.ToArray();
 
+            // Ensure that we received something from GetPeople.
             Assert.IsNotNull(peopleArray);
-            Assert.AreEqual(TestWebApplicationFactory.SamplePeople.Length, peopleArray.Length);
+            // Ensure that we received the expected number of people.
+            Assert.AreEqual(testPeople.Length, peopleArray.Length);
+            // Ensure that the people we received were in our test data set.
+            Assert.IsTrue(peopleArray.All(p => testPeople.Select(x => x.Id).Contains(p.Id)));
         }
 
+        /// <summary>
+        /// Tests that the API can query existing people by last name.
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
         public async Task CanGetPeopleByLastName()
         {
             var factory = new TestWebApplicationFactory();
             var client = factory.CreateClient();
-            factory.AddSampleData();
+            factory.AddTestData(TestData.CreateTestPeople());
             var httpRepo = new PersonClientRepository(client);
 
             var people = await httpRepo.GetPeople(new QueryPersonParameters
             {
-                LastName = TestWebApplicationFactory.JohnDoe.LastName
+                LastName = TestData.JohnDoe.LastName
             }).ConfigureAwait(false);
             var peopleArray = people?.ToArray();
 
+            // Ensure that we received an instance from GetPeople.
             Assert.IsNotNull(peopleArray);
+            // Ensure that we only received one result from our filter.
             Assert.AreEqual(1, peopleArray.Length);
-            Assert.AreEqual(TestWebApplicationFactory.JohnDoe.Id, peopleArray[0].Id);
+            // Test that the person we received was the one we wanted.
+            Assert.AreEqual(TestData.JohnDoe.Id, peopleArray[0].Id);
         }
 
+        /// <summary>
+        /// Tests that the API can query existing people by their unique identifier.
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
         public async Task CanGetPeopleById()
         {
             var factory = new TestWebApplicationFactory();
             var client = factory.CreateClient();
-            factory.AddSampleData();
+            factory.AddTestData(TestData.CreateTestPeople());
             var httpRepo = new PersonClientRepository(client);
 
             var people = await httpRepo.GetPeople(new QueryPersonParameters
             {
                 Id = new ParametersList<Guid>
                 {
-                    TestWebApplicationFactory.JohnDoe.Id,
-                    TestWebApplicationFactory.JaneSmith.Id
+                    TestData.JohnDoe.Id,
+                    TestData.JaneSmith.Id
                 }
             }).ConfigureAwait(false);
             var peopleArray = people?.ToArray();
 
+            // Ensure that we got something back from GetPeople.
             Assert.IsNotNull(peopleArray);
+            // Ensure that we received the count we expected.
             Assert.AreEqual(2, peopleArray.Length);
         }
     }
