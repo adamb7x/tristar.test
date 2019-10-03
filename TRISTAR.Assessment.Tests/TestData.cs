@@ -22,6 +22,13 @@ namespace TRISTAR.Assessment
             public const string LastName = "Doe";
         }
 
+        internal static class BobJones
+        {
+            public static readonly Guid Id = Guid.Parse("561832d0-364c-4b19-ba8a-0d730467d806");
+            public const string FirstName = "Bob";
+            public const string LastName = "Jones";
+        }
+
         /// <summary>
         /// Creates a new instance of the Jane Smith person for testing.
         /// </summary>
@@ -51,6 +58,20 @@ namespace TRISTAR.Assessment
         }
 
         /// <summary>
+        /// Creates a new instance of the Bob Jones person for testing.
+        /// </summary>
+        /// <returns></returns>
+        internal static Person CreateBobJones()
+        {
+            return new Person
+            {
+                FirstName = BobJones.FirstName,
+                Id = BobJones.Id,
+                LastName = BobJones.LastName
+            };
+        }
+
+        /// <summary>
         /// Creates an array of two people: John Doe and Jane Smith.
         /// </summary>
         /// <returns></returns>
@@ -59,7 +80,8 @@ namespace TRISTAR.Assessment
             return new[]
             {
                 CreateJohnDoe(),
-                CreateJaneSmith()
+                CreateJaneSmith(),
+                CreateBobJones()
             };
         }
     }

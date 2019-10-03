@@ -60,6 +60,8 @@ namespace TRISTAR.Assessment
             Assert.IsNotNull(person);
             // Ensure that the last name has changed to the expected value.
             Assert.AreEqual(TestData.JohnDoe.LastName, person.LastName);
+            // Ensure that the other field was unmodified.
+            Assert.AreEqual(TestData.JaneSmith.FirstName, person.FirstName);
         }
 
         /// <summary>
@@ -173,21 +175,22 @@ namespace TRISTAR.Assessment
             var client = factory.CreateClient();
             factory.AddTestData(TestData.CreateTestPeople());
             var httpRepo = new PersonClientRepository(client);
+            var idsToFind = new ParametersList<Guid>
+            {
+                TestData.JohnDoe.Id,
+                TestData.JaneSmith.Id
+            };
 
             var people = await httpRepo.GetPeople(new QueryPersonParameters
             {
-                Id = new ParametersList<Guid>
-                {
-                    TestData.JohnDoe.Id,
-                    TestData.JaneSmith.Id
-                }
+                Id = idsToFind
             }).ConfigureAwait(false);
             var peopleArray = people?.ToArray();
 
             // Ensure that we got something back from GetPeople.
             Assert.IsNotNull(peopleArray);
             // Ensure that we received the count we expected.
-            Assert.AreEqual(2, peopleArray.Length);
+            Assert.AreEqual(idsToFind.Count, peopleArray.Length);
         }
     }
 }
