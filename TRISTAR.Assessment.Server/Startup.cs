@@ -34,12 +34,11 @@ namespace TRISTAR.Assessment.Server
 
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info
+                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Title = "Test API",
                     Version = "v1"
                 });
-                options.DescribeAllEnumsAsStrings();
             });
         }
 
