@@ -13,89 +13,13 @@ namespace TRISTAR.Assessment
     [TestClass]
     public class PersonIntegrationTests
     {
-        /// <summary>
-        /// Tests that the API can add a person.
-        /// </summary>
-        /// <returns></returns>
-        [TestMethod]
-        public async Task CanCreatePerson()
-        {
-            var factory = new TestWebApplicationFactory();
-            var client = factory.CreateClient();
-            var httpRepo = new PersonClientRepository(client);
-
-            var person = await httpRepo.CreatePerson(new EditPersonParameters
-            {
-                FirstName = TestData.JohnDoe.FirstName,
-                LastName = TestData.JohnDoe.LastName
-            }).ConfigureAwait(false);
-
-            // Ensure that we received an instance of Person.
-            Assert.IsNotNull(person);
-            // Test that the first name is correct.
-            Assert.AreEqual(TestData.JohnDoe.FirstName, person.FirstName);
-            // Test that the last name is correct.
-            Assert.AreEqual(TestData.JohnDoe.LastName, person.LastName);
-        }
-
-        /// <summary>
-        /// Tests that the API can modify an existing person.
-        /// </summary>
-        /// <returns></returns>
-        [TestMethod]
-        public async Task CanEditPerson()
-        {
-            var factory = new TestWebApplicationFactory();
-            var client = factory.CreateClient();
-            factory.AddTestData(TestData.CreateTestPeople());
-            var httpRepo = new PersonClientRepository(client);
-
-            var person = await httpRepo.EditPerson(TestData.JaneSmith.Id,
-                new EditPersonParameters
-            {
-                LastName = TestData.JohnDoe.LastName
-            }).ConfigureAwait(false);
-
-            // Ensure that we received an instance of Person.
-            Assert.IsNotNull(person);
-            // Ensure that the last name has changed to the expected value.
-            Assert.AreEqual(TestData.JohnDoe.LastName, person.LastName);
-            // Ensure that the other field was unmodified.
-            Assert.AreEqual(TestData.JaneSmith.FirstName, person.FirstName);
-        }
-
-        /// <summary>
-        /// Tests that the API can remove a person.
-        /// </summary>
-        /// <returns></returns>
-        [TestMethod]
-        public async Task CanDeletePerson()
-        {
-            var factory = new TestWebApplicationFactory();
-            var client = factory.CreateClient();
-            var testPeople = TestData.CreateTestPeople();
-            factory.AddTestData(testPeople);
-            var httpRepo = new PersonClientRepository(client);
-
-            await httpRepo.DeletePerson(TestData.JohnDoe.Id)
-                .ConfigureAwait(false);
-
-            var people = await httpRepo.GetPeople(new QueryPersonParameters())
-                .ConfigureAwait(false);
-            var peopleArray = people?.ToArray();
-
-            // Ensure that something was returned from GetPeople.
-            Assert.IsNotNull(peopleArray);
-            // Since we deleted one person, our people count should reflect that.
-            Assert.AreEqual(testPeople.Length - 1, peopleArray.Length);
-            // Ensure that none of the remaining identifiers belong to John Doe because he was deleted.
-            Assert.IsTrue(peopleArray.All(p => p.Id != TestData.JohnDoe.Id));
-        }
+        #region Read
 
         /// <summary>
         /// Tests that the API can get a single person by their unique identifier.
         /// </summary>
         /// <returns></returns>
+        [TestCategory("Difficulty 1")]
         [TestMethod]
         public async Task CanGetPerson()
         {
@@ -117,6 +41,7 @@ namespace TRISTAR.Assessment
         /// Tests that the API can get all existing people.
         /// </summary>
         /// <returns></returns>
+        [TestCategory("Difficulty 1")]
         [TestMethod]
         public async Task CanGetPeople()
         {
@@ -142,6 +67,7 @@ namespace TRISTAR.Assessment
         /// Tests that the API can query existing people by last name.
         /// </summary>
         /// <returns></returns>
+        [TestCategory("Difficulty 2")]
         [TestMethod]
         public async Task CanGetPeopleByLastName()
         {
@@ -168,6 +94,7 @@ namespace TRISTAR.Assessment
         /// Tests that the API can query existing people by their unique identifier.
         /// </summary>
         /// <returns></returns>
+        [TestCategory("Difficulty 2")]
         [TestMethod]
         public async Task CanGetPeopleById()
         {
@@ -192,5 +119,145 @@ namespace TRISTAR.Assessment
             // Ensure that we received the count we expected.
             Assert.AreEqual(idsToFind.Count, peopleArray.Length);
         }
+
+        #endregion
+
+        #region Write
+
+        /// <summary>
+        /// Tests that the API can add a person.
+        /// </summary>
+        /// <returns></returns>
+        [TestCategory("Difficulty 1")]
+        [TestMethod]
+        public async Task CanCreatePerson()
+        {
+            var factory = new TestWebApplicationFactory();
+            var client = factory.CreateClient();
+            var httpRepo = new PersonClientRepository(client);
+
+            var person = await httpRepo.CreatePerson(new EditPersonParameters
+            {
+                FirstName = TestData.JohnDoe.FirstName,
+                LastName = TestData.JohnDoe.LastName
+            }).ConfigureAwait(false);
+
+            // Ensure that we received an instance of Person.
+            Assert.IsNotNull(person);
+            // Test that the first name is correct.
+            Assert.AreEqual(TestData.JohnDoe.FirstName, person.FirstName);
+            // Test that the last name is correct.
+            Assert.AreEqual(TestData.JohnDoe.LastName, person.LastName);
+        }
+
+        /// <summary>
+        /// Tests that the API can modify an existing person.
+        /// </summary>
+        /// <returns></returns>
+        [TestCategory("Difficulty 1")]
+        [TestMethod]
+        public async Task CanEditPerson()
+        {
+            var factory = new TestWebApplicationFactory();
+            var client = factory.CreateClient();
+            factory.AddTestData(TestData.CreateTestPeople());
+            var httpRepo = new PersonClientRepository(client);
+
+            var person = await httpRepo.EditPerson(TestData.JaneSmith.Id,
+                new EditPersonParameters
+                {
+                    LastName = TestData.JohnDoe.LastName
+                }).ConfigureAwait(false);
+
+            // Ensure that we received an instance of Person.
+            Assert.IsNotNull(person);
+            // Ensure that the last name has changed to the expected value.
+            Assert.AreEqual(TestData.JohnDoe.LastName, person.LastName);
+        }
+
+        /// <summary>
+        /// Tests that the API can remove a person.
+        /// </summary>
+        /// <returns></returns>
+        [TestCategory("Difficulty 1")]
+        [TestMethod]
+        public async Task CanDeletePerson()
+        {
+            var factory = new TestWebApplicationFactory();
+            var client = factory.CreateClient();
+            var testPeople = TestData.CreateTestPeople();
+            factory.AddTestData(testPeople);
+            var httpRepo = new PersonClientRepository(client);
+
+            await httpRepo.DeletePerson(TestData.JohnDoe.Id)
+                .ConfigureAwait(false);
+
+            var people = await httpRepo.GetPeople(new QueryPersonParameters())
+                .ConfigureAwait(false);
+            var peopleArray = people?.ToArray();
+
+            // Ensure that something was returned from GetPeople.
+            Assert.IsNotNull(peopleArray);
+            // Since we deleted one person, our people count should reflect that.
+            Assert.AreEqual(testPeople.Length - 1, peopleArray.Length);
+            // Ensure that none of the remaining identifiers belong to John Doe because he was deleted.
+            Assert.IsTrue(peopleArray.All(p => p.Id != TestData.JohnDoe.Id));
+        }
+
+        /// <summary>
+        /// Tests that the API can modify an existing person without affecting other properties.
+        /// </summary>
+        /// <returns></returns>
+        [TestCategory("Difficulty 2")]
+        [TestMethod]
+        public async Task CanEditPersonWithoutAffectingOtherData()
+        {
+            var factory = new TestWebApplicationFactory();
+            var client = factory.CreateClient();
+            factory.AddTestData(TestData.CreateTestPeople());
+            var httpRepo = new PersonClientRepository(client);
+
+            var person = await httpRepo.EditPerson(TestData.JaneSmith.Id,
+                new EditPersonParameters
+                {
+                    LastName = TestData.JohnDoe.LastName
+                }).ConfigureAwait(false);
+
+            // Ensure that we received an instance of Person.
+            Assert.IsNotNull(person);
+            // Ensure that the last name has changed to the expected value.
+            Assert.AreEqual(TestData.JohnDoe.LastName, person.LastName);
+            // Ensure that the other field was unmodified.
+            Assert.AreEqual(TestData.JaneSmith.FirstName, person.FirstName);
+        }
+
+        /// <summary>
+        /// Tests that the API can modify a person by setting a property to null.
+        /// </summary>
+        /// <returns></returns>
+        [TestCategory("Difficulty 3")]
+        [TestMethod]
+        public async Task CanEditPersonAndSetNullProperty()
+        {
+            var factory = new TestWebApplicationFactory();
+            var client = factory.CreateClient();
+            factory.AddTestData(TestData.CreateTestPeople());
+            var httpRepo = new PersonClientRepository(client);
+
+            var person = await httpRepo.EditPerson(TestData.JaneSmith.Id,
+                new EditPersonParameters
+                {
+                    LastName = null
+                }).ConfigureAwait(false);
+
+            // Ensure that we received an instance of Person.
+            Assert.IsNotNull(person);
+            // Ensure that the last name was removed (set to null).
+            Assert.IsNull(person.LastName);
+            // Ensure that the other field was unmodified.
+            Assert.AreEqual(TestData.JaneSmith.FirstName, person.FirstName);
+        }
+
+        #endregion
     }
 }
